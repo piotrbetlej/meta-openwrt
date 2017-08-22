@@ -3,11 +3,12 @@ HOMEPAGE = "http://wiki.openwrt.org/doc/techref/rpcd"
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://main.c;beginline=1;endline=18;md5=da5faf55ed0618f0dde1c88e76a0fc74"
 
-SRC_URI = "git://github.com/piotrbetlej/rpcd;protocol=https;branch=iwinfo_cli_yocto_poky"
-SRC_URI += "file://rpcd.init"
-SRC_URI += "file://rpcd.config"
+SRC_URI = "git://github.com/piotrbetlej/rpcd;protocol=https;branch=iwinfo_cli_yocto_poky \
+           file://rpcd.init \
+           file://rpcd.config \
+           "
 		   
-SRCREV = "311c85e7d9a8f7fee17e65afc371f4fd0c8cd588"
+SRCREV = "bc4ba0912163744263110810b9d94b2cb0a5df44"
 S = "${WORKDIR}/git"
 
 inherit cmake
@@ -17,7 +18,7 @@ PR="r1"
 DEPENDS = "ubus uci iwinfo libubox"
 
 #FIXME: put plugins to the correct place
-FILES_${PN} += "/usr/lib/*.so"
+FILES_${PN} += "/usr/lib/*.so /usr/share/rpcd*"
 
 #FIXME: install rpcd directly to /sbin from makefile instead of usig mv
 do_install_append () {
@@ -27,6 +28,6 @@ do_install_append () {
 	install ${WORKDIR}/rpcd.init ${D}/${sysconfdir}/init.d/rpcd
 	install ${S}/unauthenticated.json ${D}/usr/share/rpcd/acl.d
 	cp -a ${S}/include ${D}/usr/include
-	mv ${D}/usr/sbin ${D}/sbin  
+	mv ${D}/usr/sbin ${D}/sbin
 }
 
