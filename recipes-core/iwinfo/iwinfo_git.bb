@@ -5,23 +5,23 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 SRC_URI = "git://git.openwrt.org/project/iwinfo.git;protocol=git;branch=master"
 SRC_URI += "file://fix-make.patch"
-SRC_URI += "file://luajit.patch"
+# SRC_URI += "file://luajit.patch"
 		   
 SRCREV = "6e67940be59e1aee5d275dd61172b257cb34d726"
 S = "${WORKDIR}/git"
 
 PR="r1"
 
-DEPENDS = "uci luajit"
+DEPENDS = "uci lua5.1"
 PACKAGES += "libiwinfo"
-RDEPENDS_${PN} = "libiwinfo"
+RDEPENDS_${PN} = "libiwinfo lua5.1"
 
 FILES_${PN} = "/usr/bin"
-FILES_${PN}-dev = "/usr/include /usr/lib/libiwinfo.so" 
+FILES_${PN}-dev = "/usr/include /usr/lib/libiwinfo.so"
 FILES_libiwinfo = "/usr/lib/libiwinfo.so.0.0 /usr/lib/libiwinfo.so.0"
 
 do_compile () {
-	oe_runmake 'FPIC=-fPIC' compile
+	oe_runmake 'FPIC=-fPIC -I${B}/../recipe-sysroot/usr/include/lua5.1' compile
 }
 
 do_install () {
@@ -33,3 +33,6 @@ do_install () {
 	install ${B}/iwinfo ${D}/usr/bin
 }
 
+do_configure_append () {
+	sed -i -e 's/-llua/-llua5.1/g' ${B}/Makefile
+}
