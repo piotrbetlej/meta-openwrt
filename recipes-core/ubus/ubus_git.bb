@@ -1,3 +1,5 @@
+INSANE_SKIP_${PN} += "dev-so installed-vs-shipped file-rdeps dep-cmp build-deps"
+
 DESCRIPTION = "OpenWrt RPC daemon"
 HOMEPAGE = "http://wiki.openwrt.org/doc/techref/ubus"
 LICENSE = "LGPLv2"
@@ -21,7 +23,7 @@ RDEPENDS_${PN} += "libubox libubus"
 RDEPENDS_libubus += "libubox"
 
 FILES_${PN} = "/usr/lib/lua/5.1 /bin /sbin"
-FILES_${PN}-dev = "/usr/include /usr/lib/lib*.so"
+FILES_${PN}-dev = "/usr/include /usr/lib/lib*.so.*"
 FILES_libubus = "${base_libdir}"
 FILES_${PN}-dbg += "/usr/lib/lua/5.1/.debug"
 
@@ -30,6 +32,8 @@ do_install_append () {
         mkdir -p ${D}/lib
         
         install ${D}/usr/lib/libubus.so ${D}/${base_libdir}
+	mv ${D}/${libdir}/libubus.so ${D}/${libdir}/libubus.so.1.0.0
+        ln -rs ${D}/${libdir}/libubus.so.1.0.0 ${D}/${libdir}/libubus.so
 	mv ${D}/usr/sbin ${D}/sbin
 	mv ${D}/usr/bin ${D}/bin
 	install ${S}/lua/test.lua ${D}/usr/lib/lua/5.1

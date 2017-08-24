@@ -1,3 +1,5 @@
+INSANE_SKIP_${PN} += "dev-so installed-vs-shipped file-rdeps dep-cmp build-deps"
+
 DESCRIPTION = "Generalized Wireless Information Library (iwinfo)"
 HOMEPAGE = "http://wiki.openwrt.org/doc/howto/wireless.utilities"
 LICENSE = "GPLv2"
@@ -34,5 +36,5 @@ do_install () {
 }
 
 do_configure_append () {
-	sed -i -e 's/-llua/-llua5.1/g' ${B}/Makefile
+	sed -i -e 's/ -llua/ -llua5.1/g' ${B}/Makefile
 }
