@@ -24,15 +24,18 @@ RDEPENDS_${PN} += "libuci"
 PACKAGES += "libuci"
 FILES_${PN} = "/usr/lib/lua/5.1 /usr/bin /sbin "
 FILES_${PN}-dev = "/usr/include /usr/lib/libuci.so.*"
-FILES_libuci = "${base_libdir}/libuci.so.*"
+FILES_libuci = "${base_libdir}/libuci.so*"	
 FILES_${PN}-dbg += "/usr/lib/lua/5.1/.debug"
 
 
 do_install_append () {
         mkdir -p ${D}/lib ${D}/lib/config ${D}/sbin
+
         install ${D}/usr/lib/libuci.so ${D}/${base_libdir}
+	
 	mv ${D}/${base_libdir}/libuci.so ${D}/${base_libdir}/libuci.so.1.0.0
-        ln -rs ${D}/${base_libdir}/libuci.so.1.0.0 ${D}/${base_libdir}/libuci.so
-        install ${WORKDIR}/uci.sh ${D}/${base_libdir}/config
+        ln -rs ${D}/${base_libdir}/libuci.so.1.0.0 ${D}/${base_libdir}/libuci.so.1
+        
+	install ${WORKDIR}/uci.sh ${D}/${base_libdir}/config
         install ${D}/usr/bin/uci ${D}/sbin
 }

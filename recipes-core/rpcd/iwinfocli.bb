@@ -1,3 +1,5 @@
+INSANE_SKIP_${PN} += "dev-so installed-vs-shipped file-rdeps dep-cmp build-deps"
+
 DESCRIPTION = "This package provides the UBUS RPC backend server to expose various functionality to frontend programs via JSON-RPC."
 HOMEPAGE = "http://wiki.openwrt.org/doc/techref/rpcd"
 LICENSE = "ISC"
