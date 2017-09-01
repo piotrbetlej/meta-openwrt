@@ -17,8 +17,8 @@ inherit cmake
 
 PR="r1"
 
-DEPENDS = "ubus uci iwinfo"
-RDEPENDS_${PN} += "uci ubus iwinfo"
+DEPENDS = "ubus uci iwinfo libnl"
+RDEPENDS_${PN} += "uci ubus iwinfo libnl-genl"
 
 #FIXME: put plugins to the correct place
 FILES_${PN} += "/usr/lib/*.so /usr/share/rpcd*"
