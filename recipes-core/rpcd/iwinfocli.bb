@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/piotrbetlej/rpcd;protocol=https;branch=iwinfo_cli_yo
            file://rpcd.config \
            "
 		   
-SRCREV = "bc4ba0912163744263110810b9d94b2cb0a5df44"
+SRCREV = "${AUTOREV}"
 S = "${WORKDIR}/git"
 
 inherit cmake
