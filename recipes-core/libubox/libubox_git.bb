@@ -13,9 +13,9 @@ inherit cmake
 
 PR="r1"
 
-DEPENDS = "json-c luajit"
-RDEPENDS_${PN} = "lua-socket"
-EXTRA_OECMAKE = "-DLUAPATH=/usr/lib/lua/5.1"
+DEPENDS = "json-c"
+RDEPENDS_${PN} = ""
+EXTRA_OECMAKE = "-DLUAPATH=/usr/lib/lua/5.1 -DBUILD_LUA=OFF"
 
 FILES_${PN} += "/usr/lib/lua/5.1 /lib/ /usr/share"
 FILES_${PN}-dbg += "/usr/lib/lua/5.1/.debug"
