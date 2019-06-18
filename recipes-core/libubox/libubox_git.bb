@@ -15,10 +15,11 @@ PR="r1"
 
 DEPENDS = "json-c"
 RDEPENDS_${PN} = ""
-EXTRA_OECMAKE = "-DLUAPATH=/usr/lib/lua/5.1 -DBUILD_LUA=OFF"
+# EXTRA_OECMAKE = "-DLUAPATH=/usr/lib/lua/5.1 -DBUILD_LUA=OFF"
+EXTRA_OECMAKE = "-DBUILD_LUA=OFF"
 
-FILES_${PN} += "/usr/lib/lua/5.1 /lib/ /usr/share"
-FILES_${PN}-dbg += "/usr/lib/lua/5.1/.debug"
+FILES_${PN} += "/lib/ /usr/share"
+FILES_${PN}-dbg += ""
 FILES_${PN}-dev = "/usr/lib/*.so  /usr/include"
 
 do_install_append () {
@@ -26,6 +27,4 @@ do_install_append () {
 	install ${D}/usr/lib/libubox.so ${D}/lib
 	install ${D}/usr/lib/libblobmsg_json.so ${D}/lib
 	install ${D}/usr/lib/libjson_script.so ${D}/lib
-	install ${S}/examples/uloop-example.lua ${D}/usr/lib/lua/5.1/
 }
-
