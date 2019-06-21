@@ -5,7 +5,7 @@ HOMEPAGE = "http://wiki.openwrt.org/doc/howto/wireless.utilities"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-SRC_URI = "git://localhost/locrepo/iwinfo;branch=master;protocol=ssh"
+SRC_URI = "git://github.com/piotrbetlej/iwinfo.git;branch=master;"
 		   
 SRCREV = "${AUTOREV}"
 S = "${WORKDIR}/git"
