@@ -5,27 +5,25 @@ HOMEPAGE = "http://wiki.openwrt.org/doc/howto/wireless.utilities"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-SRC_URI = "git://github.com/piotrbetlej/iwinfo.git;branch=master"
-SRC_URI += "file://fix-make.patch"
-# SRC_URI += "file://luajit.patch"
+SRC_URI = "git://localhost/locrepo/iwinfo;branch=master;protocol=ssh"
 		   
 SRCREV = "${AUTOREV}"
 S = "${WORKDIR}/git"
 
 PR="r1"
 
-DEPENDS = "uci lua5.1 libnl"
+DEPENDS = "libnl libubox"
 PACKAGES += "libiwinfo"
-RDEPENDS_${PN} = "libiwinfo lua5.1 libnl-genl"
+RDEPENDS_${PN} = "libiwinfo libubox libnl-genl"
 
 FILES_${PN} = "/usr/bin"
 FILES_${PN}-dev = "/usr/include /usr/lib/libiwinfo.so"
-FILES_libiwinfo = "/usr/lib/libiwinfo.so.0.0 /usr/lib/libiwinfo.so.0"
+FILES_libiwinfo = "/usr/lib/libiwinfo.so.0.0 /usr/lib/libiwinfo.so.0 /usr/lib/libiwinfo.so"
 
 EXTRA_OEMAKE = "IWINFO_BACKENDS=nl80211"
 
 do_compile () {
-	oe_runmake 'FPIC=-fPIC -I${B}/../recipe-sysroot/usr/include/lua5.1 -I${B}/../recipe-sysroot/usr/include/libnl3 -I${B}/../recipe-sysroot/usr/include' compile
+	oe_runmake 'FPIC=-fPIC -I${B}/../recipe-sysroot/usr/include/libnl3 -I${B}/../recipe-sysroot/usr/include' compile
 }
 
 do_install () {

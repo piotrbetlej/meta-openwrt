@@ -5,7 +5,7 @@ HOMEPAGE = "http://wiki.openwrt.org/doc/techref/rpcd"
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://main.c;beginline=1;endline=18;md5=da5faf55ed0618f0dde1c88e76a0fc74"
 
-SRC_URI = "git://github.com/piotrbetlej/rpcd;protocol=https;branch=iwinfo_cli_yocto_poky \
+SRC_URI = "git://localhost/locrepo/rpcd;protocol=https;branch=plain_iwinfocli;protocol=ssh \
            file://rpcd.init \
            file://rpcd.config \
            "
@@ -17,8 +17,8 @@ inherit cmake
 
 PR="r1"
 
-DEPENDS = "uci iwinfo libnl"
-RDEPENDS_${PN} += "uci iwinfo libnl-genl"
+DEPENDS = "iwinfo libnl"
+RDEPENDS_${PN} += "iwinfo libnl-genl"
 
 EXTRA_OECMAKE = "-DFILE_SUPPORT=OFF -DIWINFO_SUPPORT=OFF"
 
